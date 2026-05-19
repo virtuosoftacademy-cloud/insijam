@@ -1,6 +1,19 @@
+name: insijam-marketing
 services:
   app:
-    build: .
-    ports:
-      - "3000:80"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: insijam-marketing-app
+    container_name: insijam-app-marketing
     restart: unless-stopped
+    env_file:
+      - .env.marketing
+    ports:
+      - "8081:80"
+    networks:
+      - insijam_network
+
+networks:
+  insijam_network:
+    external: true
